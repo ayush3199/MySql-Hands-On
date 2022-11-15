@@ -1,0 +1,167 @@
+
+
+
+
+
+
+
+
+
+
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| ayush               |
+| employee_management |
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| ss                  |
++---------------------+
+6 rows in set (0.00 sec)
+
+mysql> create database demo;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| ayush               |
+| demo                |
+| employee_management |
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| ss                  |
++---------------------+
+7 rows in set (0.00 sec)
+
+mysql> use demo;
+Database changed
+
+
+mysql> create table user(id int(10),name varchar(50),city varchar(50));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+
+mysql> show tables;
++----------------+
+| Tables_in_demo |
++----------------+
+| user           |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> desc user;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| city  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+mysql> alter table user to student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to student' at line 1
+mysql> alter table user rename to student;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_demo |
++----------------+
+| student        |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> insert into student (id,name,city) values(1,"Ayush","Bareilly");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(3,"Nikhil","Kanpur");
+Query OK, 1 row affected (0.00 sec)
+
+
+
+mysql> insert into student (id,name,city) values(2,"Shashank","Delhi");
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> insert into student values(3,"Nikhil","Kanpur");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+----------+----------+
+| id   | name     | city     |
++------+----------+----------+
+|    1 | Ayush    | Bareilly |
+|    2 | Shashank | Delhi    |
+|    3 | Nikhil   | Kanpur   |
++------+----------+----------+
+3 rows in set (0.00 sec)
+
+
+
+mysql> alter table student add phone varchar(20);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show * from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from student' at line 1
+mysql> select * from student;
++------+----------+----------+-------+
+| id   | name     | city     | phone |
++------+----------+----------+-------+
+|    1 | Ayush    | Bareilly | NULL  |
+|    2 | Shashank | Delhi    | NULL  |
+|    3 | Nikhil   | Kanpur   | NULL  |
++------+----------+----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update student set phone="9876545688" where  name ="ayush";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+----------+----------+------------+
+| id   | name     | city     | phone      |
++------+----------+----------+------------+
+|    1 | Ayush    | Bareilly | 9876545688 |
+|    2 | Shashank | Delhi    | NULL       |
+|    3 | Nikhil   | Kanpur   | NULL       |
++------+----------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update student set phone="9876545688" where  id=2;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set phone="9876545488" where  id=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+----------+----------+------------+
+| id   | name     | city     | phone      |
++------+----------+----------+------------+
+|    1 | Ayush    | Bareilly | 9876545688 |
+|    2 | Shashank | Delhi    | 9876545688 |
+|    3 | Nikhil   | Kanpur   | 9876545488 |
++------+----------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from student where id=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+--------+----------+------------+
+| id   | name   | city     | phone      |
++------+--------+----------+------------+
+|    1 | Ayush  | Bareilly | 9876545688 |
+|    3 | Nikhil | Kanpur   | 9876545488 |
++------+--------+----------+------------+
+2 rows in set (0.00 sec)
